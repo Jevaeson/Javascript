@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="./css/reset.css">
+  <title>Document</title>
+  <style>
+    .list{
+      width: 700px;
+      margin:0 auto;
+      margin-top: 200px;
+      border:1px solid #ccc;
+      padding: 20px;
+    }
+    .list li{
+      overflow: hidden;
+    }
+    .list li input[type="checkbox"]{
+      float: left;
+    }
+    .list li input[type="text"]{
+      width: 40px;
+      float: left;
+      text-align: center;
+      outline: none;
+      margin-left: 4px;
+      margin-right: 4px;
+    }
+    .list li span{
+      display: block;
+      float: left;
+      margin-left: 60px;
+    }
+    .list li:first-child{
+      margin-bottom: 20px;
+    }
+    .list li:first-child span:nth-child(2){
+      margin-left: 0;
+    }
+    .list li:first-child span:nth-child(4){
+      margin-left: 100px;
+    }
+    .list li:first-child span:nth-child(5){
+      margin-left: 94px;
+    }
+    .list li:first-child span:nth-child(6){
+      margin-left: 110px;
+    }
+    .list li+li{
+      margin-top: 10px;
+      height: 30px;
+      position: relative;
+    }
+    .list li+li span{
+      margin-left: 80px;
+    }
+    .list li+li span:nth-child(7){
+      margin-left: 72px;
+    }
+    .list li+li button{
+      float: left;
+    }
+    .list li+li button:nth-child(4){
+      margin-left: 60px;
+    }
+    .list li+li .del-btn{
+      position:absolute;
+      right:0px;
+      top:0px;
+    }
+    .zongjia{
+      width: 700px;
+      margin:0 auto;
+      border:1px solid #ccc;
+      border-top: none;
+      padding: 20px;
+      overflow: hidden;
+    }
+    .zongjia p {
+      float: right;
+      margin-right: 10px;
+    }
+    .zongjia p span{
+      color:red;
+    }
+    
+  </style>
+</head>
+<body>
+  <ul class="list">
+    <li>
+      <input class="all" type="checkbox" /><span>全选</span> <span>商品</span> <span>单价</span>
+      <span>数量</span> <span>小计</span>
+    </li>
+  </ul>
+  <div class="zongjia">
+    <p>总价：<span>0</span>元</p>
+    <p>已选择<span>0</span>件商品</p>
+  </div>
+  <script src="./js/jquery-3.3.1.js"></script>
+  <script>
+    var goodsArr = [
+      { goodsName: 'iPhone6', price: 1000 },
+      { goodsName: 'iphone7', price: 2000 },
+      { goodsName: 'iphone8', price: 3000 },
+      { goodsName: 'iphoneX', price: 4000 },
+    ]
+    // 以下是添加的内容
+    for (var i = 0; i < goodsArr.length; i++) {
+        var good = goodsArr[i];
+        var newLi = $('<li>')
+        newLi.html(
+          `
+          <input class="radio" type="checkbox" />
+          <span>${good.goodsName}</span>
+          <span class="single">${good.price}</span>
+          <button class="reduce">-</button>
+          <input type="text" value="1" />
+          <button class="add">+</button>
+          <span class="xiaoji">${good.price}</span>
+          <button class="del-btn">删除</button>
+          `
+          )
+        $('.list').append(newLi)
+    }
+    // 函数的设计
+    function totalMc() {
+      var totalMoney = 0;
+      var totalCount = 0;
+      $('.radio').each(function () {
+          var state1 = $(this).prop('checked')
+          if (state1 === true) {
+              var goods = parseInt($(this).siblings('.xiaoji').text());
+              var num =  parseInt($(this).siblings('input:text').val());
+              totalMoney += goods;
+              totalCount += num;  
+          }
+      });
+      $('.zongjia p:eq(1) span').html(totalCount);  
+      $('.zongjia p:eq(0) span').html(totalMoney); 
+    }
+    // 以下是全选的设计
+    $('.all').change(function() {
+        var state = $(this).prop('checked')
+        $(this).parent().siblings().find('input:checkbox').prop('checked',state)
+        if (state === true) {
+          totalMc()
+        }else{
+          $('.zongjia p:eq(1) span').html('0');  
+          $('.zongjia p:eq(0) span').html('0'); 
+        }
+    });
+    $('.radio').change(function() {
+        var state = $(this).prop('checked')
+        if(state == false){
+            $('.all').prop('checked',false)
+        }else{
+            var allState = true
+            $('.radio').each(function() {
+                var state1 = $(this).prop('checked')
+                if(state1 == false){
+                    allState = false
+                }
+            });
+            $('.all').prop('checked',allState)
+        }
+    });
+    // 以下是数量的加减
+    $(".add").click(function() {
+        var num = $(this).siblings('input:text').val()
+        var single = $(this).siblings('.single').text()
+        num = num*1 + 1
+        $(this).siblings('input:text').val(num)
+        $(this).siblings('.xiaoji').text(num*single)
+        totalMc()    
+    });
+    $(".reduce").click(function() {
+        var num = $(this).siblings('input:text').val()
+        var single = $(this).siblings('.single').text()
+        num = num*1 - 1
+        $(this).siblings('input:text').val(num)
+        $(this).siblings('.xiaoji').text(num*single)
+        if(num < 1){
+          $(this).siblings('input:text').val(1)
+          $(this).siblings('.xiaoji').text(single)
+        }
+        totalMc() 
+    });
+    // 以下是删除的设计
+    $('.del-btn').click(function() {
+        $(this).parent().remove()
+        totalMc()
+    });
+
+    // 记得把下边这个写成函数
+    $('.radio').change(function() {
+        totalMc()  
+    });
+    // 以下是input
+    $('input:text').blur(function(){
+        var num = $(this).val()
+        var single = $(this).siblings('.single').text()
+        $(this).siblings('.xiaoji').text(num*single)
+        if(num < 1){
+          $(this).val(1)
+          $(this).siblings('.xiaoji').text(single)
+        }
+        totalMc() 
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .box{
+      width: 200px;
+      height: 200px;
+      background-color: hotpink;
+    }
+  </style>
+</head>
+<body>
+  <ul>
+    <li class="one"></li>
+    <li class="one"></li>
+    <li class="one"></li>
+    <li class="one"></li>
+    <li class="one"></li>
+  </ul>
+  <!-- 事件属性要等于 函数调用 点击时触发函数调用 -->
+  <button class="btn" onclick = 'fun()' >按钮</button>
+  <button class="btn">按钮</button>
+  <button class="btn">按钮</button>
+  <button class="btn">按钮</button>
+  <button class="btn">按钮</button>
+  <div class="box"></div>
+  <button class="change">变色！</button>
+  <script>
+    
+    // 从这一刻 放弃jquery
+    // 原生的 dom 操作
+    // document 对象
+    // 重渲 优化
+    // $(document).ready(function(){
+    //   // 当页面内的所有dom节点加载完毕
+    // })
+
+
+    // js 获取html 元素
+
+    // document.getElementById('id名')
+    // document.getElementById('btn')
+
+    // document.getElementsByClassName('class名')  获取的是类数组
+    // var arr = document.getElementsByClassName('one')[0]
+    // console.log(arr);
+    
+
+    // document.querySelector('css选择器')  获取的是满足条件的第一个
+    // document.querySelectorAll('css选择器') 获取的是满足条件的所有元素的类数组
+
+    // 原生事件的绑定
+    var fun = function(){
+      console.log('hahaha');
+    }
+    var liArr = document.querySelectorAll('.btn')
+    for (var i = 0; i < liArr.length; i++) {
+      liArr[i].onclick = fun
+    }
+
+    // 修改元素的样式 css addClass removeClass width height
+    // 原生dom对象 (通过原生的方法获取的真实dom节点)下 有个属性 style
+    // 那么直接对 stlye 对象下的属性进行修改 相当于直接修改行内样式
+    function getElement(selector){
+      return document.querySelector(selector)
+    }
+
+    getElement('.change').onclick = function(){
+      getElement('.box').style.backgroundColor = '#000'
+    }
+    
+    // flex 容器(display:flex的元素) 项目(flex下的子级叫项目)
+  </script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    article{
+        width: 60%;
+        margin:0 auto;
+    }
+    article h1{
+        font-size: 28px;
+        text-align: center;
+    }
+    article p{
+        text-align: justify;
+        line-height: 20px;
+        text-indent: 2em;
+    }
+    article textarea{
+        width: 100%;
+        height: 50px;
+        outline:none;
+        resize:none;
+    }
+    article ul li{
+        margin-top: 20px;
+        list-style: disc;
+    }
+  </style>
+</head>
+<body>
+    <article>
+        <h1>Hello world</h1>
+        <p>
+            Hello, everybody! Thank you. Thank you. Thank you, everybody. All right, everybody go ahead and have a seat. How is everybody doing today? (Applause.) How about Tim Spicer? (Applause.) I am here with students at Wakefield High School in Arlington, Virginia. And we've got students tuning in from all across America, from kindergarten through 12th grade. And I am just so glad that all could join us today. And I want to thank Wakefield for being such an outstanding host. Give yourselves a big round of applause.
+        </p>
+        <div>
+            <!-- 评论框和按钮 -->
+            <textarea placeholder="评论" name="" id="comment" cols="30" rows="10"></textarea>
+            <button class="submit">评论</button>
+            <ul class="list">
+                <li>用户192.168.1.101：真好</li>
+                <li>用户192.168.1.102：真棒</li>
+                <li>用户192.168.1.103：真强</li>
+                <li>用户192.168.1.104：真大</li>
+            </ul>
+        </div>
+    </article>
+    <script>
+      document.querySelector('.submit').onclick = function(){
+        var val = document.querySelector('#comment').value
+
+        // 1.正则表达式写法
+        // var re =/^\s*$/
+        // if (re.test(val)) {
+        //   alert('输入不能为空')
+        // }else{
+        // }
+
+        // 2.trim
+        if (val.trim()) {
+          // 输入了内容
+          if (val.trim().length > 10) {
+            // document.createElement('标签名')
+            // dom 元素.innerText 属性 设置或 获取文本内容
+            // dom 元素.innerHtml 属性 设置或 获取html内容
+            // ul.appendChild(li) 向ul 内部最后 添加li
+
+            // 设立新的li
+            var newLi = document.createElement('li')
+            // 给li添加内容
+            newLi.innerHTML = `${val.trim()} <button class="del-btn">删除</button>`
+            // 加入新的li 到 ul里面 最后
+            // document.querySelector('.list').appendChild(newLi)
+            var firstLi = document.querySelectorAll('.list li')[0]
+            // document.querySelector('.list').insertBefore(要添加的,原来存在的li)
+            document.querySelector('.list').insertBefore(newLi,firstLi)
+            // 清空内容
+            document.querySelector('#comment').value = ''
+          }else{
+            alert('有效字符长度不够')
+          }
+        }else{
+          alert('输入不能为空')
+        }
+      }
+      
+      // 删除按钮事件 用事件委托绑定 委托人一直存在的
+      // 删除的语法 ul.removeChild(li) 只能父级删除子级
+      // dom.parentNode  获取dom元素的 父级节点
+      document.querySelector('.list').onclick = function(event){
+                var ele = event.target              
+                if (ele.tagName === 'BUTTON') {
+                  this.removeChild(ele.parentNode)
+                }
+      }
+    </script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <h1>hello world</h1>
+  <script src="./js/jq.js"></script>
+  <script>
+    // 公有的继承
+    // function CreatePeople(){}
+    // CreatePeople.prototype.say = function(){
+    //   console.log('hello');
+    // }
+    // var lucy = new CreatePeople()
+    // console.log(lucy);
+    
+    // lucy.say()
+
+    // function Hero(name){
+    //   this.name = name
+    // }
+
+    // //  原型的继承
+    // Hero.prototype = CreatePeople.prototype
+
+    // var spriderMan = new Hero('Peter')
+    // console.log(spriderMan);
+    // spriderMan.say()
+
+
+    // 父级私有 当作子级公有的继承
+    function CreatePeople(name){
+      this.firstName = name
+    }
+    CreatePeople.prototype.sayName = function(){
+      console.log('我姓' + this.firstName);
+    }
+    var father = new CreatePeople('张')
+    console.log(father);
+    
+    function Children(name){
+      this.lastName = name
+    }
+    // 继承私有属性
+    Children.prototype = father
+    // 创建自己的原型
+    Children.prototype.say = function(){
+      console.log(this.firstName + this.lastName);
+      
+    }
+    var child = new Children('三')
+    console.log(child);
+    child.say()
+
+    // 继承 原型链
+
+    // call apply bind 对象冒充 改变方法中的 this 指向
+    var x = 10
+    var obj = {
+      x:20
+    }
+    function fun() {
+      console.log(this.x);
+    }
+    // 将 fun 函数使用bind方法改变内部的this 指向，改变成bind方法的参数 并返回改变之后的新的函数
+    // 调用某个函数时中间加上bind 并给bind方法传参 那么会生成一个新的函数 这个函数里面的内容和原来一致 只不过函数内部this的指向发生了改变
+    var fun1 = fun.bind(obj)
+    fun1()
+
+
+    function class1(age){
+      this.age = age
+      this.name = function(){
+        console.log('我是class1内的方法');
+      }
+    }
+
+    function class2(age){
+      // 调用 class1 把里面的this 改成 class2 内的this
+      // 相当于让 class2 的实例化对象继承 class1的 name方法
+
+      // call的方法的第二个参数 相当于 class1 的第一个参数
+      class1.call(this,age)
+    }
+    
+    var f = new class2(6)
+    f.name()
+    console.log(f.age);
+
+    // apply 和 call 完全一样 只不过 给class1 传递参数的时候 需要写成数组
+
+    // 查找数组中最大的数
+
+    var arr = [1,2,3,4,5,6,7,8]
+    // max方法里没有this 第一个参数随便写
+    var num = Math.max.apply(null,arr)
+    console.log(num);
+  </script>
+</body>
+</html>

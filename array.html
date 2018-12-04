@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 数组 属性 方法
+    // length
+    // var arr = [1,2,3]
+    // console.log(arr.length);
+    // console.log(arr);
+    // map reduce
+    
+    // 数组的求和 reduce(function(result,ele,ind){},0)
+    // result 代表的是最终结果 ele代表的是数组的一项 index对应下标 后面的0代表最终结果的初始值 可以自己定义
+    // function 的大括号内 必须填写返回最后的结果
+    // var arr = [1,2,3,4,5,6,7]
+    // var result = arr.reduce(function(num,ele,index){
+    //   if(ele%2 === 1){
+    //     return num += ele
+    //     // 奇数
+    //   }else{
+    //     return num
+    //     // 起到链接的作用 为下一次提供num的初始值
+    //   }
+    //   // return 有一个额外的意思 就是当作下一次遍历数组的初始值
+    //   // 最后一次的return 就是reduce 函数的返回值
+    // },0)
+    // console.log(result)
+    
+    // 取出其中的奇数数组
+    // 方法一
+    // var arr1 = arr.filter(function(ele,index,array){
+    //       return ele%2 === 1
+    // })
+    // console.log(arr1);
+    // 方法二
+    // var arr1 = arr.reduce(function(newArr,ele){
+    //     if (ele%2 === 0) {
+    //       newArr.push(ele)
+    //     }
+    //     return newArr
+    // },[])
+    // console.log(arr1);
+
+
+
+
+    
+
+    // 数组的排序或去重 sort 面试题一般为：不适用sort 做出排序
+    // var users = [
+    //   { name:'小月', age:5},
+    //   { name:'中月', age:4},
+    //   { name:'大月', age:3},
+    //   { name:'大月月', age:2},
+    //   { name:'大月月', age:1},
+    // ]
+    // users.sort(function(a,b){
+    //   return a.age - b.age
+    // })
+    // console.log(users);
+
+    // 冒泡算法  快排
+    // 以下是冒泡算法
+    var arr = [1,3,4,2,5,9,8,7,5,6]
+    for (var j = 0; j < arr.length-1; j++) {
+      for (var i = 0; i < arr.length-1-j; i++) {
+        if (arr[i]>arr[i + 1]) {
+          var num = arr[i + 1]
+          arr[i+1] = arr[i]
+          arr[i] = num
+        }  
+      }    
+    }
+    console.log(arr);
+
+    // 去重
+    var arr = [1,3,4,7,5,9,7,7,5,6]
+    var newArr = []
+    for (var i = 0; i < arr.length; i++) {
+      if (newArr.indexOf(arr[i]) === -1) {
+        newArr.push(arr[i])
+      }
+    }
+    console.log(newArr)
+  </script>
+</body>
+</html>

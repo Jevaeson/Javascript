@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="./css/reset.css">
+  <title>小学生计算器</title>
+  <style>
+    input[type=text]{
+      margin-bottom: 10px;
+    }
+    .jisuanqi{
+      width: 240px;
+      padding: 20px;
+      margin:0 auto;
+      margin-top: 100px;
+      background-color:hotpink;
+    }
+    .yunsuan{
+      width: 30px;
+      line-height: 20px;
+      font-size: 12px
+    }
+    .num0{
+      width: 51px;
+    }
+    .num00{
+      width: 24px;
+    }
+  </style>
+</head>
+<body class="clearfix">
+  <!-- <input class="num1"  type="text">
+  <input class="sign"  type="text">
+  <input class="num2"  type="text">
+  <input type="button" value="=">
+  <input class="result"  type="text"> -->
+  <div class="jisuanqi">
+      <input type="text">
+      <input class="result" type="button" value="=">
+      <input class="reset" type="button" value="C">
+      <br>
+      <input class="num" type="button" value="1">
+      <input class="num" type="button" value="2">
+      <input class="num" type="button" value="3">
+      <input class="yunsuan" type="button" value="+">
+      <br>
+      <input class="num" type="button" value="4">
+      <input class="num" type="button" value="5">
+      <input class="num" type="button" value="6">
+      <input class="yunsuan" type="button" value="-">
+      <br>
+      <input class="num" type="button" value="7">
+      <input class="num" type="button" value="8">
+      <input class="num" type="button" value="9">
+      <input class="yunsuan" type="button" value="*">
+      <br>
+      <input class="num num0" type="button" value="0">
+      <input class="num num00" type="button" value=".">
+      <input class="yunsuan" type="button" value="/">
+  </div>
+  <script src="./js/jquery-3.3.1.js"></script>
+  <script>
+    // 1.给=绑定点击事件
+    // 2.获取值     .val()
+    // 3.运算
+    // $('input:button').click(function () { 
+    //   var num1 = $('.num1').val()*1
+    //   var sign = $('.sign').val()
+    //   var num2 = $('.num2').val()*1
+    //   var result = 0
+    //   switch (sign) {
+    //     case '+':
+    //       result = num1 + num2
+    //       break;
+    //     case '-':
+    //       result = num1 - num2
+    //       break;
+    //     case '*':
+    //       result = num1 * num2
+    //       break;
+    //     case '/':
+    //       result = num1 / num2
+    //       break;
+    //   }
+    //   $('.result').val(result)
+    // });
+    var num = ''
+    var num2 = ''
+    var sign = ''
+    var result = ''
+    $('.num').click(function () { 
+      var value = $(this).val()
+      if(sign == ''){
+                 num = num + value
+                 $('input:text').val(num)
+             }else{
+                num2 = num2 + value
+                $('input:text').val(num + sign + num2)           
+             }
+    })
+    $('.yunsuan').click(function () {
+      if(num2){
+        switch(sign){
+          case "+":
+          result = num * 1 + num2 * 1
+          break
+          case "-":
+          result = num * 1 - num2 * 1
+          break
+          case "*":
+          result = num * 1 * num2 * 1
+          break
+          case "/":
+          result = num * 1 / num2 * 1
+          break
+        }
+        result = result.toFixed(2)
+        num = ''
+        sign = ''
+        num2 = ''
+      }
+      sign = $(this).val()
+      // 结果存在并且num1不存在的时候 num1 = result
+      if(result && num === ''){
+        num = result
+      }
+      $('input:text').val(num + sign)
+    })
+    $('.result').click(function(){
+      switch(sign){
+          case "+":
+          result = num * 1 + num2 * 1
+          break
+          case "-":
+          result = num * 1 - num2 * 1
+          break
+          case "*":
+          result = num * 1 * num2 * 1
+          break
+          case "/":
+          result = num * 1 / num2 * 1
+          break
+      }
+      result = result.toFixed(2)
+      $('input:text').val(result)
+      num = ''
+      sign = ''
+      num2 = ''
+    })
+    $('.reset').click(function () { 
+      num = ''
+      sign = ''
+      num2 = ''
+      $('input:text').val('')
+    })
+    // 由于js浮点型数字计算的时候会出现计算错误，是因为js浮点型数字的精度问题。使用数字的 toFixed()方法
+    // 写法 数字。toFixed(数字) 括号内的数字意思是保留几位小数
+    // 将数字保留几位小数并且转化成字符串 规则是四舍五入
+  </script>
+</body>
+</html>

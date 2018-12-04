@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="./css/reset.css">
+  <title>Document</title>
+  <style>
+    .box{
+      width: 670px;
+      height: 329px;
+      overflow: hidden;
+      position:relative;
+      margin-top: 200px;
+      margin-left: 200px;
+    }
+    .box .pic{
+      width: 3350px;
+      height: 329px;
+      display: flex;
+      transition: all 500ms ease;
+    }
+    .list{
+      width: 100%;
+      justify-content: center;
+      display: flex;
+      position:absolute;
+      bottom:20px;
+      right:0px;
+    }
+    .list li{
+      display: flex;
+    }
+    .list li span{
+      color:#111;
+      width: 30px;
+      line-height: 30px;
+      background-color: #fff;
+      border:1px solid #ccc;
+      text-align: center;
+      cursor: pointer;
+      -moz-user-select:none;/*火狐*/
+      -webkit-user-select:none;/*webkit浏览器*/
+      -ms-user-select:none;/*IE10*/
+      -khtml-user-select:none;/*早期浏览器*/
+      user-select:none;
+    }
+    .two span{
+      display: block;
+      position:absolute;
+      top:50%;
+      font-size: 20px;
+      border:1px solid #ccc;
+      color:#ccc;
+      width: 30px;
+      line-height: 30px;
+      text-align: center;
+      border-radius: 50%;
+      cursor: pointer;
+      -moz-user-select:none;/*火狐*/
+      -webkit-user-select:none;/*webkit浏览器*/
+      -ms-user-select:none;/*IE10*/
+      -khtml-user-select:none;/*早期浏览器*/
+      user-select:none;
+    }
+    .two .prev{
+      left:20px;
+    }
+    .two .next{
+      right:20px;
+    }
+    .activeteal{
+      background-color: teal;
+    }
+    .list li .activeteal{
+      background-color: teal;
+    }
+  </style>
+</head>
+<body>
+    <div class="box">
+        <div class="pic">
+            <a href="#"><img src="images/gracetan_01.jpg" alt="" /></a>
+            <a href="#"><img src="images/gracetan_02.jpg" alt="" /></a>
+            <a href="#"><img src="images/gracetan_03.jpg" alt="" /></a>
+            <a href="#"><img src="images/gracetan_04.jpg" alt="" /></a>
+            <a href="#"><img src="images/gracetan_05.jpg" alt="" /></a>
+        </div>
+        <ul class="list">
+            <li><span data-index='0'>1</span></li>
+            <li><span data-index='1'>2</span></li>
+            <li><span data-index='2'>3</span></li>
+            <li><span data-index='3'>4</span></li>
+            <li><span data-index='4'>5</span></li>
+        </ul>
+        <div class="two">
+          <span class="prev">＜</span>
+          <span class="next">＞</span>
+        </div>
+    </div>
+    <script>
+      function _$(selector){
+        return document.querySelectorAll(selector)
+      }
+
+      // _$('.list li span')[0].style.backgroundColor = 'teal'
+      addClass(_$('.list li span')[0],'activeteal')
+
+      // for (let i = 0; i < _$('.list li span').length; i++) {
+      //   _$('.list li span')[i].onclick = function(){
+      //     // 先改变所有span的颜色        
+      //     for (var j = 0; j < _$('.list li span').length; j++) {
+      //       _$('.list li span')[j].style.backgroundColor = '#fff'
+      //     }
+      //     this.style.backgroundColor = 'teal'
+      //     var leftNum = i * -670 + 'px' 
+      //     document.querySelector('.pic').style.transform = 'translateX('+leftNum+')'
+      //   }
+      // }
+      // 如果不用 let 就不能用i  那就用另外一种方法 ：在html内给span 定义一个自定义属性 data-index 值为相应的索引值
+      // 使用 原生dom对象.getAttribute('属性名')获取属性值
+
+      // 事件委托 替换for循环绑定事件 处理新增元素绑定不上事件
+
+      // 将后代元素的事件委托给祖先 前提是因为事件冒泡
+
+
+
+      document.querySelector('.list').onclick = function(event){
+        // 只有点击了 ul 下面的span 才能执行一些事
+        // 通过event事件对象 获取鼠标点击的元素判断是否是span 才能去执行换图和改变颜色的操作
+        // 要使用事件对象的话 需要在事件函数内 写个参数 event才能使用
+        // event.target 获取鼠标真正点击的dom元素 有可能是ul 或者 span
+        var ele = event.target
+        // console.log(ele.tagName);
+        // 判断ele 是否为 span
+        // dom元素.tagName 获取当前dom元素的标签名
+        if(ele.tagName === 'SPAN'){
+          // 点击了ul 下的某个 span
+          // 以下是按钮颜色的设计
+          for (var j = 0; j < _$('.list li span').length; j++) {
+            // _$('.list li span')[j].style.backgroundColor = '#fff'
+            removeClass(_$('.list li span')[j],'activeteal')
+          }
+          // ele.style.backgroundColor = 'teal'
+          addClass(ele,'activeteal')
+          // 以下是图片的设计
+          var ind = ele.getAttribute('data-index')
+          var ml = ind * -670 + 'px'
+          document.querySelector('.pic').style.marginLeft = ml
+          num = ind
+          console.log(num);
+        }
+      }
+
+
+      var num = 0
+      // '下一个'的设计
+      document.querySelector('.next').onclick = function(){
+        num = num * 1 + 1
+        if(num > 4){
+            num = 0
+        }
+        // 以下是图片的设计
+        var ml = num * -670 + 'px'
+        document.querySelector('.pic').style.marginLeft = ml
+        // 以下是按钮颜色的设计
+        for (var j = 0; j < _$('.list li span').length; j++) {
+            // _$('.list li span')[j].style.backgroundColor = '#fff'
+            removeClass(_$('.list li span')[j],'activeteal')
+          }
+          // _$('.list li span')[num].style.backgroundColor = 'teal'
+          addClass(_$('.list li span')[num],'activeteal')
+      }
+      // '上一个'的设计
+      document.querySelector('.prev').onclick = function(){
+        num = num * 1 - 1
+        if(num < 0){
+            num = 4
+        }
+        // 以下是图片的设计
+        var ml = num * -670 + 'px'
+        document.querySelector('.pic').style.marginLeft = ml
+        // 以下是按钮颜色的设计
+        for (var j = 0; j < _$('.list li span').length; j++) {
+            // _$('.list li span')[j].style.backgroundColor = '#fff'
+            removeClass(_$('.list li span')[j],'activeteal')
+          }
+          // _$('.list li span')[num].style.backgroundColor = 'teal'
+          addClass(_$('.list li span')[num],'activeteal')
+      }
+      
+
+      // 用原生js写出jq的addClass 和 removeClass
+      function addClass(obj, cls){
+        var obj_class = obj.className//获取 class 内容.
+        var blank = (obj_class != '') ? ' ' : ''//判断获取到的 class 是否为空, 如果不为空在前面加个'空格'.
+        var added = obj_class + blank + cls//组合原来的 class 和需要添加的 class.
+        obj.className = added//替换原来的 class.
+      }
+      function removeClass(obj, cls){
+        var obj_class = ' '+obj.className+' '//获取 class 内容, 并在首尾各加一个空格
+        obj_class = obj_class.replace(/(\s+)/g, ' ')//将多余的空字符替换成一个空格
+        var removed = obj_class.replace(' '+cls+' ', ' ')//用空格  替换掉 首尾加了空格的 class
+        // removed = removed.replace(/(^\s+)|(\s+$)/g, '')//去掉首尾空格
+        removed = removed.trim()
+        obj.className = removed;//替换原来的 class.
+      }
+
+      // 老师的写法
+      function add(className,ele){
+        var oldClass = ' ' + ele.className + ' '
+        if (oldClass.indexOf(' ' + className + ' ') === -1) {
+          var newClass = `${oldClass.trim()} ${className}`
+          ele.className = newClass
+        } 
+      }
+      function remove(className,ele){
+        var oldClass = ' ' + ele.className + ' '
+        if (oldClass.indexOf(' ' + className + ' ') != -1){
+          
+        }
+      }
+    </script>
+</body>
+</html>

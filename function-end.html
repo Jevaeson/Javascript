@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div>
+    <button class="btn">1</button>
+    <button class="btn">2</button>
+    <button class="btn">3</button>
+    <button class="btn">4</button>
+    <button class="btn">5</button>
+  </div>
+  <script>
+    // 函数
+    // 匿名函数 回调函数 递归函数
+
+    // 闭包 现象 内部函数的作用域永远在外部函数内，外层函数定义的变量会始终存储在内层中 供内部函数调用
+    var btnArr = document.querySelectorAll('.btn')
+     for (var i = 0; i < btnArr.length; i++) {
+      //  (function(x){
+      //   btnArr[i].onclick = function(){
+      //     console.log(x); 
+      //   }
+      //  })(i)
+      
+      btnArr[i].onclick = (function(){
+        var ind = i
+        return function(){
+          console.log(ind);
+        }
+      })()
+     }
+
+     var fib = function(n){
+       if (n == 1) {
+         return 1
+       }else if (n == 2){
+         return 2
+       }else if(n > 2){
+         return fib(n - 1) + fib(n - 2)
+       }
+     }
+     var a = fib(5)
+     console.log(a);
+
+     function fun(n,o){
+       console.log(o);
+       return {
+         fun:function(m){
+           return fun (m,n)
+         }
+       }
+     }
+     var a = fun(4)
+     a.fun(5)
+
+    //  构造函数 创建对象的
+  </script>
+  
+</body>
+</html>

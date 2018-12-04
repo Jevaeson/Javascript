@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="./css/reset.css">
+  <title>Document</title>
+  <style>
+    /* .box{
+      width: 50%;
+      height: 300px;
+      background-color: teal;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    } */
+    /* .box span{
+      width: 50px;
+      height: 40px;
+      background-color: #ccc;
+      line-height: 40px;
+      text-align: center;
+    } */
+    /* .box span:first-child{
+      width: 100px;
+      background-color: teal;
+    }
+    .box span:last-child{
+      flex-grow:1;
+    } */
+
+    .phone{
+      width: 100%;
+      /* 屏幕的高度比例 */
+      height: 100vh;
+      /* 通过定位实现高度100% position:absolute 四边为0 overflow:hidden */
+      background-color: #ccc;
+      display: flex;
+      flex-direction: column;
+    }
+    .phone header{
+      width: 100%;
+      height: 50px;
+      background-color: pink;
+      flex-shrink: 0;
+    }
+    .phone .main{
+      width: 100%;
+      flex-grow:1;
+      overflow: auto;
+    }
+    .phone .main .box{
+      width: 100%;
+      height: 2000px;
+      background-color:blue;
+    }
+    .phone footer{
+      width: 100%;
+      height: 50px;
+      background-color: green;
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body>
+  <!-- <div class="box">
+    <span>hello</span>
+    <span>world</span>
+  </div> -->
+  <div class="phone">
+    <header></header>
+    <div class="main">
+      <div class="box"></div>
+    </div>
+    <footer></footer>
+  </div>
+  <!-- flex 容器(display:flex的元素) 项目(flex下的子级叫项目) -->
+
+  <!-- 容器 轴线 横向是主轴 纵向是副轴 容器下的项目按主轴方向排列 -->
+  <!-- 项目 默认是块元素 不会超出容器 地方不够 会缩小 和容器高度一样 -->
+
+  <!-- 容器相关的属性 justify-content 项目在主轴方向上的对齐方式 center居中(所有项目) -->
+  <!-- align-items -->
+  <!-- flex-direction -->
+  <!-- flex-wrap 项目在主轴方向上排不下 可以使用该属性换行 nowrap wrap wrap-reverse-->
+  <!-- align-content 属性定义了多根轴线的对齐方式。如果项目只有一根轴线，该属性不起作用。 -->
+
+  <!-- 项目相关的属性 -->
+  <!-- order 规定项目的排列顺序 值是数字 数字越大约靠后 -->
+  <!-- flex-grow 规定项目的放大比例 默认为0  存在剩余空间也不放大 设置为1 占满剩余空间 -->
+  <!-- flex-shrink 如果所有项目的flex-shrink属性都为1，当空间不足时，都将等比例缩小。如果一个项目的flex-shrink属性为0，其他项目都为1，则空间不足时，前者不缩小。 -->
+  <script src="./js/jquery-3.3.1.js"></script>
+  <script>
+    console.log($(window).height());
+    console.log(window.screen.availHeight);
+    
+  </script>
+</body>
+</html>

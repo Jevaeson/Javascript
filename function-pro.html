@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 函数
+    // 创建 1.函数式创建 2.变量式创建  区别 注意函数名称  (top name)
+    // 函数声明不执行 调用才执行
+    // 参数 返回值
+
+    // 函数的参数  形参 实参 函数内部有个关键字 arguments 指的是实参的集合(类数组)
+    // function fun(m,n){
+    //    n = 10
+    //   // 函数的形参相当于在函数内部定义变量 调用的时候传的实参相当于给变量赋值 没有传相当于没赋值
+    //    console.log(m);
+    //    console.log(n);
+    // }
+    // fun(1,20)
+
+    // function method(y){
+    //   x+=4
+    //   y+=4
+    //   console.log(x+y);   //6+13
+    // }
+    // var x = 2
+    // var y = 2
+    // method(9)
+    // console.log(x+y);     //6+2
+    
+
+    // js作用域 只有函数有作用域 局部 整个页面也是一个作用域 全局
+    // 当前作用下声明的函数 和 变量 只有当前作用域和后代作用域能访问
+
+    // 声明在全局作用域下的变量越多 越污染全局环境
+
+    // ;(function() {
+    //   var a = 10
+    //   console.log(a);
+    // })()
+    // 匿名函数立即执行 封装了局部变量
+
+    function fun(){
+      // console.log(arguments);
+      console.log(Array.prototype.slice.call(arguments));
+      // es6新增方法 Array.from(类数组) 返回新的数组
+      // 类数组 1.arguments  2.正则表达式的exec 方法的返回值 
+      console.log(Array.from(arguments));   
+      var res = 0
+      for (var i = 0; i < arguments.length; i++) {
+        // console.log(arguments[i]);
+        res = res + arguments[i] 
+      }
+      console.log(res); 
+    }
+    fun(1,2,3,4,5,6,7,8)
+
+    // 类数组
+    // var obj = {
+    //   '0':'aaa',
+    //   '1':'asd',
+    //   index:1,
+    //   length:2,
+    // }
+    // console.log(obj);
+    // console.log(Array.from(obj));
+
+
+    // 方法内部的this 指的是调用该方法的对象
+    // 方法调用的时候才去查找 this 的指向
+    // document.querySelector('button').onclick = function(){
+    //   console.log(this);
+    // }
+
+    // var xiaoming = {
+    //   name:'小明',
+    //   age:20,
+    //   sayName:function(){
+    //     console.log('我叫' + this.name);
+    //   }
+    // }
+    // xiaoming.sayName()
+
+    // var obj1 = {
+    //   a:10,
+    //   b:{
+    //     a:11,
+    //     fun:function(){
+    //       console.log(this.a);
+    //     }
+    //   }
+    // }
+    // obj1.b.fun()
+    // var f = obj1.b.fun
+    // f()
+
+    // 匿名函数 如何执行 只能立即执行
+    // ;(function() {
+    //   console.log(1);
+    // })()
+
+    // 回调函数 一个函数被当做另一个函数的参数那么前面的函数就被成为回调函数 (callback)
+  </script>
+</body>
+</html>

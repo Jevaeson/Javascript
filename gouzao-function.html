@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+    <script src="https://cdn.bootcss.com/lodash.js/4.17.11/lodash.min.js"></script>
+    <script>
+    //  构造函数 创建对象的
+    var arr = new Array(1,2,3,4,5,6)
+    console.log(arr);
+
+    // js 里面内置了很多构造函数 Array RegExp Date
+    function creatCat(catName,catAge){
+      return{
+        name:catName,
+        age:catAge
+      }
+    }
+    var myCat = creatCat('小花',2)
+    console.log(myCat);
+
+    // instanceof 检测准确的数据类型 可以区分不用的内置对象
+
+    // 构造函数 函数名首字母必须大写 函数内部使用this 关键字给对象添加属性或方法
+    function CreateCat(catName,catAge){
+      this.name = catName
+      this.age = catAge
+    }
+    // 构造函数的原型 给类添加公有的 属性或方法 的对象
+    // 构造函数.prototype 获取构造函数的原型对象
+    CreateCat.prototype.sing = function(){
+      console.log('喵喵');
+      
+    }
+    // 类 通过类创建的对象称为 实例化类 使用new+ 构造函数() 时 函数内部的this 指的是 实例化类
+    // 用构造函数创建的实例化对象 有两部分组成
+    // 1.构造函数内的私有属性或方法  2.构造函数原型内的公有属性和方法
+    var myCat = new CreateCat('小花',2)
+    var myCat2 = new CreateCat('小黑',3)
+    // console.log(myCat);
+    // console.log(myCat2);
+    // myCat.sing = function(){
+    //   console.log('喵喵喵');
+    // }
+    // 每个 实例化类都有 __proto__属性 该属性指向的是构造函数的原型
+    // 每一个对象下 都会有一个 __proto__ 最后的一个__proto__ 指的是最大的构造函数Object的原型
+    // 构造函数的原型有个 constructor 属性 该属性指的就是构造函数本身
+    myCat.sing()
+    myCat2.sing()
+    
+
+    // lodash工具库
+    var arr = _.defaults({'a' : 1},{'a' : 3,'b' : 2});
+    console.log(arr);
+
+    // 严格模式 use strict
+    // 在任何地方给未声明的变量直接赋值 相当于定义了一个全局变量a
+
+
+    </script>
+</body>
+</html>

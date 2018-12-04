@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+// 常用属性
+// 1  element.id       设置或返回元素的 id。
+
+// 2  element.innerHTML   设置或者返回元素的内容，可包含节点中的子标签以及内容
+
+// 3  element.innerText  设置或者返回元素的内容，不包含节点中的子标签以及内容
+
+// 4  element.className   设置或者 返回元素的类名
+
+// 5  element.nodeName    返回该节点的大写字母标签名
+
+// 6  element.nodeType   返回该结点的节点类型，1表示元素节点  2表示属性节点……
+
+// 7  element.nodeValue  返回该节点的value值，元素节点的该值为null
+
+// 8  element.childNodes  返回元素的子节点的nodeslist对象，nodelist类似于数组
+
+// ，有length属性，可以使用方括号 [index] 访问指定索引的值(也可以使用item
+
+// (index)方法)。但nodelist并不是数组。
+
+// 9  element.firstChild/element.lastChild  返回元素的第一个/最后一个子节点(包含
+
+// 注释节点和文本节点)
+
+// 10  element.parentNode  返回该结点的父节点
+
+// 11  element.previousSibling  返回与当前节点同级的上一个节点(包含注释节点和文本节点)
+
+// 12  element.nextSibling   返回与当前节点同级的下一个节点(包含注释节点和文本节点)
+
+// 13  element.childElementCount :  返回子元素(不包括文本节点以及注释节点)的个数
+
+// 14  element.firstElementChild /lastElementChild 返回第一个/最后一个子元素(不
+
+// 包括文本节点以及注释节点)
+
+// 15  element.previousElementSibling/nextElementSibling  返回前一个/后一个兄
+
+// 弟元素(不包括文本节点以及注释节点)
+
+// 16  element.clientHeight/clientWidth  返回内容的可视高度/宽度（不包括边框，
+
+// 边距或滚动条）
+
+// 17  element.offsetHeight/offsetWidth /offsetLeft/offsetTop 返回元素的高度/宽
+
+// 度/相对于父元素的左偏移/上偏移(包括边框和填充,不包括边距)
+
+// 18  element.scrollHeight/scrollWidth/scrollLeft/scrollTop返回整个元素的高度（
+
+// 包括带滚动条的隐蔽的地方）/宽度/返回当前视图中的实际元素的左边缘和左边缘之
+
+// 间的距离/上边缘的距离
+
+// 19  element.style  设置或返回元素的行内样式属性。
+
+// element.style.backgroundColor  注意，与CSS不同，style的属性要去掉横杠，第
+
+// 二个单词首字母要大写
+
+// 20  element.tagName  返回元素的标签名(大写)
+
+
+
+// 常用方法
+// 1  element.appendChild(nodeName)   向元素添加新的子节点，作为最后一个子
+
+// 节点，并返回该子节点。如需向 HTML DOM 添加新元素，您首先必须创建该元素
+
+// ，然后把它追加到已有的元素上。
+
+
+// 2  element.getAttribute(para)   返回元素节点的指定属性值。
+
+// 3  element.getAttributeNode(para)   返回指定的属性节点。
+
+// 4  element.getElementsByTagName(para) 返回拥有指定标签名的所有子元素的集
+
+// 合。
+
+// 5  element.hasAttribute(para)  如果元素拥有指定属性，则返回true，否则返回 false。
+
+// 6  element.insertBefore(insertNode,appointedNode)  在指定的已有的子节点之前插入新节点。
+
+// js演示代码：
+//         var a=document.getElementById('first_form');
+//         var inputList=document.getElementsByTagName('input');
+//         var newNode=document.createElement('input');
+//         var newNode2=document.createTextNode('天马流星拳');
+//         var br=document.createElement('br');
+//         newNode.type='radio';
+//         newNode.name='gongfu';
+//         newNode.value='tmlxq';
+//         a.insertBefore(newNode,inputList[2]);
+//         a.insertBefore(newNode2,inputList[3]);
+//         a.insertBefore(br,inputList[3]);
+
+
+// 7  element.removeAttribute() 从元素中移除指定属性。
+
+
+// 8  element.removeChild()   从元素中移除子节点。
+
+// 9  element.replaceChild(newNode,replaceNode)  把指定节点替换为新节点。
+
+// 10  element.setAttribute(attrName,attrValue)  把指定属性设置或更改为指定值。
+
+// 11  element.setAttributeNode()    修改指定属性节点
+
+// 12  nodelist.item(0) 返回 NodeList 中位于指定下标的节点。
+// 	nodelist[0]
+	</script>
+</body>
+</html>

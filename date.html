@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .time{
+      width: 650px;
+      height: 650px;
+      background-image: url('./images/time.jpg');
+      position: relative;
+    }
+    .seconds{
+      width: 4px;
+      height: 200px;
+      background-color: #111;
+      transform: rotate(0deg);
+      transform-origin: bottom center;
+      position:absolute;
+      top:20%;
+      left:50%;
+      transition: all 1s linear;
+    }
+    .minutes{
+      width: 4px;
+      height: 160px;
+      background-color: #111;
+      transform: rotate(0deg);
+      transform-origin: bottom center;
+      position:absolute;
+      top:26%;
+      left:50%;
+    }
+    .hours{
+      width: 4px;
+      height: 120px;
+      background-color: #111;
+      transform: rotate(0deg);
+      transform-origin: bottom center;
+      position:absolute;
+      top:32%;
+      left:50%;
+    }
+  </style>
+</head>
+<body>
+  <button class="btn">停止</button>
+  <button class="start">开始</button>
+  <br>
+  现在时间：
+  <div class="box">
+    <span class="hour"></span>:
+    <span class="min"></span>:
+    <span class="sec"></span>
+  </div>
+  距离下课还有：
+  <div class="box2">
+      <span class="hour2"></span>:
+      <span class="min2"></span>:
+      <span class="sec2"></span>
+  </div>
+  抢购价：
+  <div class="box3">
+    <span>￥</span>
+    <span>888</span>
+  </div>
+  <div class="time">
+    <div class="hours"></div>
+    <div class="minutes"></div>
+    <div class="seconds"></div>
+  </div>
+  
+  <script src="./js/jquery-3.3.1.js"></script>
+  <script>
+    // 引用类型 null object
+    // null 当我们需要初始化对象的初始值时 可能会定义成null
+
+    // js 内置对象 数组array  日期对象date
+
+    // date
+    // 创建
+    // var date = new Date()
+    // console.log(date);
+    // // 方法
+    // // getFullYear
+    // var year = date.getFullYear()
+    // console.log(year);
+    // var month = date.getMonth()+1
+    // console.log(month);
+    // var hao = date.getDate()
+    // console.log(hao);
+    // var day = date.getDay()
+    // console.log(day);
+    // var hour = date.getHours()
+    // console.log(hour);
+    // var min = date.getMinutes()
+    // console.log(min);
+    // var sec = date.getSeconds()
+    // console.log(sec);
+    // var milSecond = date.getMilliseconds()
+    // console.log(milSecond);
+    // // 上述所有方法 加上UTC变成世界时间
+    // // 上述所有方法 把get换成set 就是设置
+    
+    // // 获取格林威治时间 1970.1.1 0:0:0 到现在的毫秒数
+    // var time = date.getTime()
+    // console.log(time);
+    
+    // 获取当前时间的操作 反复执行 
+    // 计时器 setTimeout 延迟执行
+          // setInterval 每过多少时间调用一次函数
+          // clearTimeout 使用clearTimeout清除 就停止了
+          // clearInterval 清除计时器
+          // 配套使用
+
+
+
+    // // setTimeout延迟执行 setTimeout(函数，时间)
+    // var a = setTimeout(function(){
+    //   console.log(1);
+    // },3000)
+    // // clearTimeout
+    // // 如何使用 将setTimeout赋值给一个变量  使用clearTimeout 清除
+    // $('.btn').click(function(){
+    //   clearTimeout(a)
+    // })
+    
+
+    // setInterval 每过多少时间调用一次函数
+    // var a = setInterval(function(){
+    //   console.log(1);   
+    // },500)
+    // $('.btn').click(function(){
+    //   clearTimeout(a)
+    // })
+    // $('.start').click(function () { 
+    //   // 清除计时器
+    //   clearInterval(a)
+    //   a = setInterval(function(){
+    //     console.log(1);   
+    //   },500)  
+    // });
+
+    // setInterval( ,0)代表什么
+
+    // 电子表
+    // setInterval(函数，500)
+    // 函数内部 获取当前的事件并展示
+    function fun(){
+      var date = new Date()
+      var hour = date.getHours()
+      var min = date.getMinutes()
+      var sec = date.getSeconds()
+      $('.hour').text(hour)
+      $('.min').text(min)
+      $('.sec').text(sec)
+      if(sec < 10){
+        $('.sec').text('0'+sec)
+      }
+      if(min < 10){
+        $('.min').text('0'+min)
+      }
+      if(hour < 10){
+        $('.hour').text('0'+hour)
+      }
+    }
+    fun()   
+    setInterval(fun,1000)
+    
+    function distance(){
+      var date = new Date()
+      var hourSec = date.getHours()*3600
+      var minSec = date.getMinutes()*60
+      var sec = date.getSeconds()
+      var totalNow = hourSec + minSec + sec
+      var totalNew = 17 * 3600 + 30 * 60
+      var distance = totalNew - totalNow
+      var disHour =  parseInt(distance / 3600)
+      var disMin = parseInt(distance % 3600 / 60)
+      var disSec = parseInt(distance % 60)
+      $('.hour2').text(disHour)
+      $('.min2').text(disMin)
+      $('.sec2').text(disSec)
+      if(disSec < 10){
+        $('.sec2').text('0'+disSec)
+      }
+      if(disMin < 10){
+        $('.min2').text('0'+disMin)
+      }
+      if(disHour < 10){
+        $('.hour2').text('0'+disHour)
+      }
+      if (distance <= 0) {
+        clearInterval(a)
+        $('.hour2').text('00')
+        $('.min2').text('00')
+        $('.sec2').text('00')
+        $('.box3 span:last-child').text(666)
+      }
+    }
+
+    distance()
+    var a = setInterval(function(){
+      distance()
+    },1000)
+
+    // 数学对象 Math
+    // 下舍 Math.floor(数) 把括号的数字进行下舍 并返回结果 原数字不会改变
+    // 上进 Math.ceil(数) 上进
+    // 四舍五入 Math.round 四舍五入
+    // 0-1随机数 Math.random()
+    // console.log(Math.random());
+    // Math.max()
+    // Math.min()
+    // console.log(Math.min(1,2,3,4,5,6));
+
+    // 时钟
+
+    var num = 0
+    function time(){
+        var date = new Date();
+        var sec = date.getSeconds();
+        var min = date.getMinutes();
+        var hour = date.getHours();
+        var littleHour = min / 60
+        var littleDeg = littleHour * 30
+        var finalHour = hour * 30 + littleDeg
+
+        if (sec === 0) {
+          num++
+        }      
+        $('.seconds').css('transform','rotate(' + (sec * 6 + num * 360) + 'deg)')
+        $('.minutes').css('transform','rotate(' + min * 6 + 'deg)')
+        $('.hours').css('transform','rotate(' + finalHour + 'deg)')
+    }
+    time()
+    setInterval(function () {
+        time()
+	  }, 1000);
+  </script>
+</body>
+</html>

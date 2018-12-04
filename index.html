@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>javascript</title>
+  <style></style>
+</head>
+<body>
+  <script src="./js/jquery-3.3.1.js"></script>
+  <script>
+    // 原生 js es3 es5
+    // es6 es2015
+    // typescript
+
+    // 基础知识
+    // 变量 存储数据的容器
+    // 变量规则：
+    // 1.var声明
+    // 2.变量名只能以字母 下划线 $开头
+    // 3.变量名不允许使用js的关键字或保留字命名
+    // 4.名字通常使用驼峰方式命名
+    // **注意** 不要在声明变量之前使用它
+    // undefined 变量声明了 没赋值
+    // a is not defined 变量未声明直接使用报错
+    // 数据类型：数字number 字符串string(带引号) 布尔值boolean(true false) undefined null 对象
+
+    // 变量声明提升 当声明一个变量的时候会将声明过程(var a)提升到当前作用域的最顶端，而赋值不会提升。
+    // 每一个function的大括号就是一个作用域 还有页面内也是一个作用域
+    // 当前作用域的声明的变量 子作用域内允许访问 当前作用域也可以访问
+
+    // 标识符 变量 函数名 对象属性名
+
+    // 数据类型之间的转换
+    // 检测数据类型的方法 typeof 值 返回改值得数据类型
+    // var num = '1'
+    // console.log(typeof num)
+
+    // 字符串转化为数字:
+    // 1.直接乘以数字1
+    // 2.parseInt() parseFloat()
+    // 3.使用Number(值) 规则整体看能不能转化 能转化就转化 不能转化程NaN
+
+    // 数字转化为字符串
+    // String(值) 值.toString()
+    // var a = 10
+    // console.log(a.toString())
+
+    // 其他类型转化为布尔值
+    // if语句的小括号内写的任何东西都会默认转化为布尔值
+    // 只有 0 '' null undefined NaN 这些值为 false
+    // var num = ' '
+    // if (num) {
+    //   console.log('hahaha')
+    // }
+
+    // 运算符 + - / *
+    // 一元运算符 ++ -- + -
+    // ++a 先计算后输出 a++先输出后计算
+    // var a = 10
+    // console.log(++a)
+
+    // 逻辑运算符 与&& 或|| 非!
+    // var a = 15
+    // if (a>10&&a<20) {
+    //   console.log(a)
+    // }
+
+    // 基础运算 + - / * %
+
+    // 条件运算 > >= < <= == === !=
+    // == != 判断的是值的相等 === ！==判断的是值和类型全部相等
+    // 以后判断都用三个等号
+
+    // 赋值运算 =
+    // var a = 10
+
+    // 二元 += -= *= /=
+    // var a = 20
+    // a += 30  // a = a + 30 的简写
+    // console.log(a)
+    
+
+    // 三元 if else 的简写
+    // var fenShu = 59
+    // var result = ''
+    // 方法一
+    // if(fenShu >= 60){
+    //   result = '及格'
+    // }else{
+    //   result = '不及格'
+    // }
+    // console.log(result)
+    // 方法二
+    // result = fenShu >= 60 ? '及格' : '不及格'
+    // console.log(result)
+  </script>
+</body>
+</html>

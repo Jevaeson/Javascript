@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <h1>hello<span>world</span></h1>
+  <script src="./js/jquery-3.3.1.js"></script>
+  <script>
+    // jq 拓展 给jq添加方法
+    //  自定制一个 highLight 方法
+    jQuery.fn.extend({
+      highLight:function(obj){
+        // 修改jquery对象的颜色
+
+        // 新方法 对象的合并
+        // var defaultObj = {
+        //   backgroundColor:'teal',
+        //   color:'red',
+        // }
+        // 后面的覆盖前面的
+        var newObj = $.extend(jQuery.fn.highLight.defaultOptions,obj)
+        // var newObj = Object.assign(defaultObj,obj)
+        // var newObj = {...defaultObj,...obj}
+
+        // if (!obj) {
+        //   // 相当于没有传参
+        //   obj = {
+        //     backgroundColor:'yellow',
+        //     color:'red',
+        //   }
+        // } else {
+        //   if (!obj.color) {
+        //     obj.color = 'red'
+        //   }
+        //   if (!obj.backgroundColor) {
+        //     obj.backgroundColor = 'yellow'
+        //   }
+        // }
+        this.css('color',newObj.color).css('backgroundColor',newObj.backgroundColor)
+      }
+    })
+    // 给高亮方法添加一组默认值 默认配置必须是 方法有了之后才能设置
+    jQuery.fn.highLight.defaultOptions = {
+      backgroundColor:'teal',
+      color:'red',
+    }
+    $('h1 span').highLight({backgroundColor:'#ccc','color':'green'})
+  </script>
+  
+</body>
+</html>

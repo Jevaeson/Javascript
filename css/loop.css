@@ -1,0 +1,72 @@
+.loop{
+  position: relative;
+}
+.loop > a > img {
+  width: 100%;
+  display: block;
+  position: absolute;
+  top:0;
+  bottom:0;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+.loop > a:first-child > img {
+  z-index: 1;
+  opacity: 1;
+}
+.list{
+  position: absolute;
+  bottom:20px;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.list > li{
+  margin-right: 5px;
+  display: flex;
+}
+.list > li:last-child{
+  margin-right: 0;
+}
+.list > li > span{
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #ccc;
+  cursor: pointer;
+}
+.list > li:first-child > span{
+  background-color: red;
+}
+
+.arrow{
+  width: 100%;
+  position: absolute;
+  bottom:40%;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.arrow > li{
+  display: flex;
+}
+.arrow > li > span{
+  width: 24px;
+  height: 40px;
+  background-color: rgba(0,0,0,.2);
+  cursor: pointer;
+  text-align: center;
+  line-height: 40px;
+  font-size: 24px;
+  color:#fff;
+  -moz-user-select:none;/*火狐*/
+  -webkit-user-select:none;/*webkit浏览器*/
+  -ms-user-select:none;/*IE10*/
+  -khtml-user-select:none;/*早期浏览器*/
+  user-select:none;
+}
+.arrow > li > span:hover{
+  background-color: rgba(0,0,0,.5);
+}

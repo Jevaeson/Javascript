@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .box{
+      width: 200px;
+      height: 200px;
+      background-color: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="box"></div>
+  <button class="btn">按钮</button>
+  <script>
+    // animate('人','样式对象')
+    // 从样式对象内拿到属性名去更改css
+    // 使用计时器让元素每过一段时间 就改变样式
+    function animate(ele,styleObj,callback){
+      // 默认styleObj 内只有一个属性
+      // 从对象中获取属性名 使用for in 语句遍历对象 可以获取对象的属性名以及属性值
+      // 要修改的属性名 和 修改的属性值
+
+      // 方法一
+      // for(var i in styleObj){
+      //   var styleName = i
+      // }
+      // var styleValue = styleObj[styleName]
+      // console.log(styleName,styleValue);
+
+      // 方法二
+      // 获取属性名
+      var styleName = Object.keys(styleObj)[0]
+      // 获取属性值
+      var targetValue = styleObj[styleName]
+      console.log(styleName,targetValue); 
+      // 非ie 使用window.getComputedStyle(元素,null) 获取该元素的最终样式对象
+      // 获取初始值
+      var startValue = parseFloat(
+        window.getComputedStyle(ele,null)[styleName]
+      ) 
+      console.log(startValue);
+      
+      // 每隔10ms执行
+
+      // 方法一
+      // var a = setInterval(function(){
+      //   if (startValue > targetValue) {
+      //     startValue--
+      //   }else if(startValue < targetValue){
+      //     startValue++
+      //   }else{
+      //     clearInterval(a)
+      //   }
+      //   ele.style[styleName] = startValue + 'px'
+      // },10)
+
+      // 方法二
+      function run(){
+        if (startValue > targetValue) {
+          startValue--
+          requestAnimationFrame(run)
+        }else if (startValue < targetValue){
+          startValue++
+          requestAnimationFrame(run)
+        }else{
+          if (callback) {
+            callback()
+          } 
+        }
+        ele.style[styleName] = startValue + 'px'
+      }
+      run()
+
+    }
+    
+    // 点击按钮之后 每过10毫秒 让box的margin-left +1
+    // var ml = 0
+    document.querySelector('button').onclick = function(){
+      // setInterval(function () {
+      //   ml++
+      //   document.querySelector('.box').style.marginLeft = ml + 'px'
+	    // }, 10);
+      animate(document.querySelector('.box'),{ width : 300 },function(){
+        animate(document.querySelector('.box'),{ width : 200 })
+      })
+    }
+
+    var b = 10
+    function fun() {
+      b +=10
+      // console.log(b);
+      if (b < 1000) {
+        // 也是调用函数 过一会调用
+         requestAnimationFrame(fun)
+      }
+    }
+    // 递归函数 函数内部调用该函数
+    fun()
+  </script>
+  
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      .box {
+        width: 200px;
+        height: 50px;
+        font-size: 12px;
+        text-align: center;
+        line-height: 50px;
+        background-color: yellowgreen;
+      }
+    </style>
+  </head>
+  <body>
+    <button class="btn">开始</button>
+    <div class="box"><span>奖品</span></div>
+    <script src="./js/jquery-3.3.1.js"></script>
+    <script>
+      var jiang = [
+        '一等奖 iphone xs',
+        '二等奖 三星S9',
+        '三等奖 华为Meat 20 pro',
+        '四等奖 人民币1000',
+        '纪念奖'
+      ]
+      // 使用 setInterval(函数,200)
+      // 函数内部要做的事   随机获取数组的某一项 并展示到页面上
+      // 随机获取数组的某一项   jiang[]
+      // Math.random()  获取的是 0-1随机数         0-4的随机整数
+      // var ran = Math.floor(Math.random() * 5)
+      // console.log(jiang[ran])
+      var a
+      var ran = -1
+      $('.btn').click(function() {
+        // 由于需要点击两次按钮所以  setInterval 方法只能执行一次  因为执行多次的话就会有多个定时器
+        // 所以将 setInterval 写入了 判断语句内 if成功时声明的变量 当第二次点击的时候访问不到
+        // 那么我们在事件外面定义一个变量用来存储定时器的返回值
+        if ($(this).text() === '开始') {
+          a = setInterval(function() {
+            ran = Math.floor(Math.random() * jiang.length)
+            $('.box span').text(jiang[ran])
+          }, 100)
+          $(this).text('停止')
+        } else {
+          // 停止记时器
+          // console.log(a)
+          clearInterval(a)
+          // $(this).attr('disabled', true)
+          // 能获取到当前中的奖项
+          // ran = 4
+          // $('.box span').text(jiang[ran])
+          alert(jiang[ran])
+        }
+      })
+
+      // var b = 10
+      // if (10 > 6) {
+      //   b = 20
+      // }
+      // console.log(b)
+      var ran1 = Math.ceil(Math.random() * 10)
+      if (ran1 === 1) {
+        console.log('一等奖');
+      }else if (ran1 > 1 && ran1 < 4) {
+        console.log('二等奖');
+      }else if (ran1 >=4 && ran1 < 7 ) {
+        console.log('三等奖');
+      }else{
+        console.log('纪念奖');
+      }
+    </script>
+  </body>
+</html>

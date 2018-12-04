@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>function</title>
+</head>
+<body>
+  <script>
+    // function(){}匿名函数
+    // 函数定义：语句块的集合
+    // 函数的创建
+    // function 声明函数 fun代表函数名
+    // 小括号内写的 函数的参数 大括号内存的是语句的集合
+    // 1.函数式创建方式 函数声明提升 是将整个函数提升到当前作用域的最顶端 所以在声明之前就可以调用
+    // function fun(){
+    //   console.log('上课啦');
+    // }
+    // fun()
+    // 2.变量的方式创建 变量名即函数名
+    // var fun = function () {
+    //   console.log('上课啦');
+    // }
+    // fun()
+    // 函数创建的时候不会执行 需要fun()
+
+    // 函数的参数 这个函数实现功能时需要的值，可以根据不用的值实现不同的效果，这个值就是函数的参数
+    // 所有带小括号的基本上就是函数调用 小括号内写的就是函数的参数
+
+    // 实现两个数字相加的函数
+    // 函数声明时，写在小括号内的参数称作 形参
+    function add(num1,num2){
+      var result = num1 + num2
+      return result
+    }
+    // 函数调用的时候需要 传参 传参是一一对应的
+    var a = 10
+    var b = 10
+    console.log(add(a,b));
+      // function add(){
+      //   var result = num1 + num2
+      //   console.log(result); 
+      // }
+      // var num1 = 10
+      // var num2 = 10
+      // add()
+      // 函数的返回值 当一个函数执行完一系列功能之后 想要得到一个结果 就需要使用函数的返回值
+      // 用法 就是在操作完毕之后使用(return 需要的结果) 这样该函数就有了返回值并且返回值是需要的结果
+      // 如何得到返回值 其实函数的调用 就是 返回的结果
+
+      // 自定义函数的时候尽量函数内部不要使用函数外部的变量
+
+      // 匿名函数
+
+      // 数组的高阶方法:
+
+      // 11.filter 过滤
+
+      // 12.forEach 数组的遍历
+      var arr = [1,2,3,4]
+      arr.forEach(function(ele,index,array){
+        console.log(ele,index,array)
+      })
+
+      // 13.find() 数组的查找 通常使用在对象数组(数组里面存放的对象类型{})上
+      // 在数组中查找符合return 后条件的第一个元素并返回 原数组不变 找不到就返回undefined
+
+      // var users = [
+      //   { name:'小月', age:16},
+      //   { name:'中月', age:17},
+      //   { name:'大月', age:18},
+      //   { name:'大月月', age:18},
+      //   { name:'大月月', age:19},
+      // ]
+      // var user = users.findIndex(function(ele,index,array){
+      //   return ele.name === '大月'
+      // })
+      // console.log(user)
+
+      // 14 .findIndex() 查找的是下标 查不到返回-1
+
+      // 15. every() 检测所有元素是否符合条件，符合条件返回true 不符合返回false 通常是用来查询数组中是否都是 同一个元素
+      // var arr = [1,1,1,1,1,1,1,1]
+      // var state = arr.every(function(ele,index,array){
+      //   return ele === arr[0]
+      // })
+      // console.log(state)
+
+      // 16.sort 给数组排序
+      // var arr = [22,44,55,88,11,44,66,0,11]
+      // var newArr = arr.sort(function(a,b){
+      //   // ab是相邻的两项
+      //   return a - b
+      // })
+      // console.log(newArr)
+  </script>
+</body>
+</html>

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>object</title>
+</head>
+<body>
+  <input type="text">
+  <input class="search" type="button" value="搜索">
+  <ul class="users"></ul>
+  <script src="./js/jquery-3.3.1.js"></script>
+  <script>
+    // 数字 字符串 布尔 undefined(声明了 未赋值) null 对象
+    // 对象 自定义对象 内置对象
+
+    // 自定义对象 {}对象 对象内部有 属性名 属性值
+    // var cat = {
+    //   name:'小黑',
+    //   age:2,
+    //   sing: function() {
+    //     console.log('喵喵喵')
+    //   }
+    // }
+    // var dog = {
+    //   name:'小黑',
+    //   age:2,
+    // }
+    // 对象内部属性值是function 的话称该属性为方法
+    // 如何访问对象下的属性 对象名.属性名  如何执行对象下的方法 对象名.方法名()
+    // console.log(cat.name)
+    // console.log(cat.age)
+    // cat.sing()
+
+    // 内置对象 数组 正则表达式 日期 数学 数字 字符串 浏览器
+
+    // 数组对象 array
+    // 定义：有序的数据集合
+    // var arr = [1,2,3,4,5,6,7,8,9,10]
+    // 数组[下标 索引值] 获取第几个数
+    // console.log(arr[3]);
+    // 访问对象下没有的属性 得到的结果是undefined
+    // console.log(arr[11]);
+    // 数组的常用属性 length 数组中个数
+    // console.log(arr.length);
+
+    // 有一个数字数组 [1,2,3,4,5,6,7,8,9,10]
+    // 请依次在控制台输出数组中的元素
+    // var array = [1,2,3,4,5,6,7,8,9,10]
+    // // 数组的遍历
+    // for (var i = 0; i < array.length; i++) {
+    //   console.log(array[i]);
+    // }
+
+
+    // 数组的常用方法 1.方法的作用 2.会不会改变原来的对象 3.该方法的返回值 某个方法的返回：该方法被调用之后会变成返回值
+    // 1.push(要添加的元素)  向数组内部的最后添加元素，原来的数组改变，该方法返回 新数组的长度
+    // var arr1 = [1,2,3]
+    // var num = arr1.push(7)
+    // console.log(arr1);
+    // console.log(num);
+
+    // 2. 数组.concat(另一个数组) 将两个数组拼接，原来的数组不变，返回得到新的数组
+    // var arr1 = [1,2,3]
+    // var arr2 = [4,5,6]
+    // var newArr = arr1.concat(arr2)
+    // console.log(newArr);
+
+    // 3.pop() 删除数组中的最后一项，原数组改变，并返回被删除的元素
+    // var arr1 = [1,2,9]
+    // var a = arr1.pop()
+    // console.log(arr1);
+    // console.log(a);
+
+    // 4.unshift 最前面添加
+    // 5.shift 最前面删除
+    // var arr1 = [1,2,3]
+    // var num = arr1.shift()
+    // console.log(arr1);
+    // console.log(num);
+
+    // 6.slice(a,b) 对数组进行截取 包括开始 不包括结束 原数组不变 返回截取值
+    // 这个方法可以用来做数组的拷贝
+    // 这个方法可以只写开始 不写结束 意思就是从开始直接截取到最后包括最后一项
+    // var arr1 = [2,5,6]
+    // var newArr = arr1.slice(0,2)
+    // console.log(arr1);
+    // console.log(newArr);
+
+    // 7.splice(a,b,c) 对数组进行添加 或者 删除，a代表添加或删除的位置(下标)，b删除的个数，c要添加的元素(可以忽略) 原数组改变 返回被删除元素组成的数组，没有删除的话 返回null
+    // var arr1 = [1,2,6]
+    // var arr2 = arr1.splice(1,2,5)
+    // console.log(arr1);
+    // console.log(arr2);
+
+    // 8.join(a) 将数组的每一项以a作为连接符拼接字符串，原数组不变，返回得到新的字符串
+    // var arr1 = [1,2,6]
+    // var str = arr1.join('-')
+    // console.log(arr1);
+    // console.log(str);
+
+    // 9.reverse() 将数组顺序颠倒 原数组改变 返回颠倒后的新数组
+    // var arr1 = [1,2,6]
+    // var newArr = arr1.reverse()
+    // console.log(arr1);
+    // console.log(newArr);
+
+    // 10.indexOf (要查找的元素) 查找数组内是否包含某个元素 如果包含返回第一个匹配的下标 否则返回-1 原数组不会改变
+    // var arr1 = [1,2,6]
+    // var hasNum = arr1.indexOf(6)
+    // console.log(arr1);
+    // console.log(hasNum);
+
+    // filter map find findIndex reduce inCludes sort every forEach
+
+    // 11.filter 过滤 将一个数组根据条件生成一个新的数组   原数组不变 返回形成新的数组
+    // 写法 xx.filter(function(ele,index,array){return条件})
+    // ele 代表数组中的某一项 index 代表的是该项的下标 array代表原数组
+
+    var users = [
+      { name:'小月', age:16},
+      { name:'中月', age:17},
+      { name:'大月', age:18},
+      { name:'大月月', age:18},
+      { name:'大月月', age:19},
+    ]
+    // 
+    // jquery 的 dom 操作 新建 添加
+    // 新建 li .append ,html
+    // 如何依次获取数组中的内容
+
+    // 利用函数：将数组内的信息输出到页面上的ul内
+    // 声明一个函数
+    function createLi(users,ul){
+      for (var i = 0; i < users.length; i++) {
+        var user = users[i];
+        var newLi = $('<li>')
+        newLi.html(`姓名:<span>${user.name}</span> 年龄:<span>${user.age}</span>`)
+        ul.append(newLi)
+      }
+    }
+    createLi(users,$('.users'))
+    // for (var i = 0; i < users.length; i++) {
+    //   var user = users[i];
+    //   var newLi = $('<li>')
+    //   // 牛逼做法
+    //   newLi.html(`姓名:<span>${user.name}</span> 年龄:<span>${user.age}</span>`)
+    //   // 我的做法
+    //   // var newSpan1 = $('<span>')
+    //   // var newSpan2 = $('<span>')
+    //   // newSpan1.text(user.name)
+    //   // newSpan2.text(user.age)
+    //   // newLi.prepend(newSpan1)
+    //   // newLi.append(newSpan2)
+    //   $('ul').append(newLi)
+    // }
+
+    // $('.search').click(function () { 
+    //   var value = $('input:text').val() 
+    //   for (var i = 0; i < users.length; i++) {
+    //     var user = users[i];
+    //     if (value*1 === user.age) {
+          // 1.增加替换方法
+          // $('ul').html(
+          //   $('<li>').html(`姓名:<span>${user.name}</span> 年龄:<span>${user.age}</span>`)
+          // )   
+          // 2.删除其他
+    //       $('ul li').eq(i).siblings().remove()
+    //     } 
+    //   }                                                                                        
+    // });
+    $('.search').click(function () {
+      var value = $('input:text').val()
+      // var currentUsers = []
+      // for (var j = 0; j < users.length; j++) {
+      //   var user = users[j];
+      //   // 需要找到符合条件的所有元素将其放到新的数组内 然后清空原来的ul的内容 使用新得到的数组重新写入新的li
+      //   if (value === user.age.toString() || value === user.name) {
+      //       currentUsers.push(user)
+      //   }
+      // }
+
+      var currentUsers = users.filter(function(user,index,array){
+          // 当查找到某一项的时候只要 return后面的值为true 那么新生成的数组内就会添上该项
+          return value === user.age.toString() || value === user.name
+      })
+
+      // for 循环结束之后就得到一个存放正确结果的新数组
+      $('ul').empty()
+      // for (let i = 0; i < currentUsers.length; i++) {
+      //   var user = currentUsers[i];
+      //   var newLi = $('<li>').html(
+      //     (`姓名:<span>${user.name}</span> 年龄:<span>${user.age}</span>`)
+      //   )
+      //   $('ul').append(newLi)
+      // }
+      createLi(currentUsers,$('.users'))
+
+      if (value === '') {
+        alert('请输入关键字')
+        createLi(users,$('.users'))
+      }
+    });
+
+
+    
+
+  </script>
+</body>
+</html>

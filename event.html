@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <button>按钮</button>
+  <script>
+    // event 事件对象 事件函数内的参数(默认第一个参数是 event事件对象)
+    // jq 事件对象 兼容性
+    // 属性 target pageX (鼠标相对于文档顶部的距离) pageY type which键盘码 或者 鼠标按键码
+    // 方法 stopPropagation 阻止事件冒泡 preventDefault()阻止默认行为触发
+
+    // 原生 event 事件对象
+    // 1.获取事件对象 ie获取 window.event 非ie event
+    document.querySelector('button').onclick = function(event){
+      // 获取事件对象的兼容处理
+      // 当或者运算符左边的值转化为布尔值false时 会将 或运算符后面的值赋值给变量 反之将前面的值赋值给变量
+      // 2.获取真正触发事件的元素 也是有兼容性的
+      // 非ie eve.target                   ie(678) eve.srcElement
+      // 区分 ie 和 非ie  使用事件函数的参数来区分
+      
+      var eve = event || window.event
+      console.log(eve);
+      if (event) {
+        console.log(eve.target);
+      }else{
+        console.log(eve.srcElement);
+      }
+      console.log(eve.clientY);
+      console.log(eve.timeStamp);
+      // 3.阻止事件冒泡 非ie eve.stopPropagation()  ie(678) eve.cancelBubble = true
+      // 4. clientX clientY screenX screenY
+      // 5.键盘码 ie eve.keyCode 非ie eve.which
+      // 绑定键盘事件 最好使用 keyup
+    }
+  </script>
+</body>
+</html>

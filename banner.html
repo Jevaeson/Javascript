@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    body{
+      background-color: #333;
+    }
+    .pic{
+      width: 1170px;
+      height: 393px;
+      overflow: hidden;
+      position: relative;
+    }
+    .pic img{
+      position: absolute;
+      top:0px;
+      transition: left 1000ms ease;
+    }
+  
+  
+  
+  </style>
+</head>
+<body>
+  <div class="pic">
+    <img src="./images/slide-1.jpg" alt="">
+    <img src="./images/slide-2.jpg" alt="">
+    <img src="./images/slide-3.jpg" alt="">
+    <img src="./images/slide-4.jpg" alt="">
+    <img src="./images/slide-5.jpg" alt="">
+  </div>
+  <script src="./js/jquery-3.3.1.js"></script>
+  <script>
+    // for语句
+    // for(定义一个初始值；条件；自增|自减){执行语句}
+    // 1.首先看初始值是否满足 满足执行大括号 不成立不执行
+    // 2.如果初始值满足条件，执行自增或自减 然后再判断是否满足条件
+
+    // for语句内 可以使用两个关键字 break continue
+    // break 直接跳出 for 语句
+    // continue 跳出当前这一步循环 继续执行
+
+    // 1到100的求和
+    // var result = 0
+    // for (var i = 0; i <= 100; i++) {
+    //    result = result+i
+    // }
+    // console.log(result)
+
+    // banner图的做法
+    // $('.pic>img').each(function() { 
+    //   var left = $(this).index() * 234
+    //   $(this).css('left',left)   
+    // });
+    var imgNum = $('.pic>img').length
+    var startLeft = $('.pic').width() / imgNum
+    for (var i = 0; i < imgNum; i++) {
+      var left = i * startLeft
+      $('.pic>img:eq('+i+')').css('left',left)    
+    }
+
+    
+
+    $('.pic>img').mouseenter(function () { 
+      // 修改所有图片的left值
+      // 划过的图片以及左边的图片 left 索引值*100
+      // 划过的图片右边的图片 left (索引值-1)*100+770
+      var ind = $(this).index()
+      var single = ($('.pic').width()-770)/(imgNum - 1)
+      // each写法
+      // $('.pic>img').each(function() { 
+      //    var eachOne = $(this).index()
+      //    if(eachOne <= ind){
+      //     //  属于左边的
+      //     $(this).css('left',eachOne * single)
+      //    }else{
+      //     //  属于右边的
+      //     $(this).css('left',(eachOne - 1) * single + 770 )
+      //    }
+      // });
+
+      // for的写法
+      // 我的for写法
+      // for (var i = 0; i <= ind; i++) {
+      //     var left = i * single
+      //     $('.pic>img:eq('+i+')').css('left',left)    
+      // }
+      // for (var i = ind + 1; i < imgNum ; i++) {
+      //     var left = (i - 1) * single + 770
+      //     $('.pic>img:eq('+i+')').css('left',left)
+      //     console.log(left);      
+      // }
+      // 老师的for写法
+      for (var j = 0; j < imgNum; j++){
+        if (j <= ind) {
+          $('.pic>img').eq(j).css('left',j * single)
+        }else{
+          $('.pic>img').eq(j).css('left',(j - 1) * single + 770)
+        }
+      } 
+    });
+  
+
+
+    $('.pic>img').mouseleave(function () { 
+        for (var i = 0; i < imgNum; i++) {
+        var left = i * startLeft
+        $('.pic>img:eq('+i+')').css('left',left)    
+      }
+    });
+  </script>
+</body>
+</html>

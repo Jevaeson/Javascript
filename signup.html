@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="./css/reset.css">
+  <style>
+    body{
+      background-color: #ccc;
+      padding-top: 150px;
+    }
+    form{
+      width: 1000px;
+      margin: 0 auto;
+      border-radius: 5px;
+      background-color: #fff;
+      font-size: 16px;
+      padding-top: 15px;
+      padding-bottom: 30px;
+    }
+    .box{
+      margin-top: 15px;
+    }
+    .box > label{
+      width: 340px;
+      display: block;
+      float: left;
+      text-align: right;
+      line-height: 46px;
+      color: #333;
+    }
+    .box input[type='text']{
+      width: 200px;
+      height: 44px;
+      border:1px solid #ddd;
+      outline:none;
+      text-indent: 15px;
+      padding: 0px;
+      display: block;
+      float: left;
+    }
+    .box input[type='text']:focus{
+      border:1px solid #4aafe9;
+    }
+    .box p{
+      float: left;
+      line-height: 46px;
+      color:red;
+      font-size: 12px;
+      margin-left: 20px;
+    }
+    .password input[type='password']{
+      width:320px;
+      height: 44px;
+      border:1px solid #ddd;
+      outline:none;
+      text-indent: 15px;
+      padding: 0px;
+      display: block;
+      float: left;
+    }
+    .password p{
+      float: left;
+      line-height: 46px;
+      color:red;
+      font-size: 12px;
+      margin-left: 20px;
+    }
+    .phone input[type='text']{
+      width: 320px;
+    }
+    .submit{
+      border: 0;
+      width: 322px;
+      height: 46px;
+      margin-top: 12px;
+      background-color: #ca5252;
+      text-align: center;
+      font-size: 18px;
+      color: #fff;
+      line-height: 46px;
+      cursor: pointer;
+      margin-left: 340px;
+    }
+  </style>
+</head>
+<body>
+  <form action="">
+    <div class="email box clearfix">
+      <label for="email">账号：</label>
+      <input type="text" id="email" placeholder="6-18位字母数字组合">
+      <p></p>
+    </div>
+    <div class="password box clearfix">
+        <label for="password">密码：</label>
+        <input type="password" id="password" placeholder="6-16位密码，区分大小写">
+        <p></p>
+    </div>
+    <div class="password box clearfix">
+        <label for="confirm">确认密码：</label>
+        <input type="password" id="confirm" placeholder="再次输入密码">
+        <p></p>
+    </div>
+    <div class="phone box clearfix">
+        <label for="phone">手机号：</label>
+        <input type="text" id="phone" placeholder="11位手机号">
+        <p></p>
+    </div>
+    <button class="submit">注册</button>
+  </form>
+  <script src="./js/jquery-3.3.1.js"></script>
+  <script>
+    // 1.账号 6-18字母数字 如果第一位不是字母 报错：账号须以字母开头 字母开头位数不够 提示字数不够 中间写空格也不行
+    var emailRe = /^[a-zA-Z]/
+    // \w 一位数字、字母、下划线   \W和\w相反
+    var secondRe = /\W/
+    $('#email').blur(function() {
+      var account = $(this).val().trim()
+      var num = account.length
+      var result = emailRe.exec(account)
+      // 这里最好不要用null
+      if (result === null) {
+        // 未以字母开头
+        $(this).siblings('p').text('普通帐号须由字母开头!')
+      }else{
+        // 以字母开头
+        if (num < 6 || num >18) {
+          $(this).siblings('p').text('普通帐号须由6-18个字符组成')
+        }else{
+          if (secondRe.test(account)) {
+            $(this).siblings('p').text('帐号请用字母、数字或下划线命名')
+          }else{
+            $(this).siblings('p').text('✔')
+          }
+        }
+      }   
+    })
+
+    
+    // 2.密码 
+    // 6-16位
+    // 9位以下纯数字 1234567890 0123456789 重复的字符 密码过于简单
+    // 包含空白符 密码不符合规范
+    var passwordRe = /^\d{6,9}$/
+    // \s空白符 空格 回车 tab
+    var blankRe = /\s/
+    // 判断重复
+    var reaptRe = /^(.)\1+$/
+    $('#password').blur(function(){
+      var account = $(this).val()
+      var num = account.length
+      var result = passwordRe.test(account)
+      var result2 = reaptRe.test(account)
+      console.log(result2);
+      
+      if (num < 6 || num >16) {
+          $(this).siblings('p').text('密码须由6-16个字符组成，区分大小写')
+        }else{
+          if (result){
+            // 如果9位以下是纯数字
+            $(this).siblings('p').text('密码过于简单')
+          }else{
+            // 特殊字符
+            if (account === '0123456789' || account === '9876543210' || account === '1234567890') {
+              $(this).siblings('p').text('密码过于简单')
+            }else{
+              if (blankRe.test(account)) {
+                $(this).siblings('p').text('密码不符合规范')
+              }else{
+                $(this).siblings('p').text('✔')
+              }
+            }
+          }
+        }
+    })
+    
+    // 以下是确认密码的设计
+    $('#confirm').blur(function(){
+      var account = $(this).val()
+      var account2 = $('#password').val()
+      if (account2 === '') {
+        $(this).siblings('p').text('')
+      }else{
+        if (account2 === account) {
+          $(this).siblings('p').text('✔')
+        }else{
+          $(this).siblings('p').text('两次输入的密码不同')
+        }
+      }
+
+    })
+   
+    // 以下是手机号的设计
+    var phoneNum = /^1[0-9]{10}$/
+    var phoneRe = /^(130|131|132|133|134|135|136|137|138|139|150|151|152|153|154|155|157|158|159|166|171|173|175|176|177|178|180|181|182|183|184|185|186|187|188|189|198|199)/
+    $('#phone').blur(function(){
+      var account = $(this).val()
+      var num = account.length
+      var result = phoneNum.test(account)
+      var result2 = phoneRe.test(account)
+      if (result === false) {
+        $(this).siblings('p').text('手机号输入有误，请重新输入')
+      }else{
+        if (result2) {
+          $(this).siblings('p').text('✔')
+        }else{
+          $(this).siblings('p').text('手机号输入有误，请重新输入')
+        }
+      }
+    })
+
+    $('#email').keyup(function(event){
+      var account = $(this).val()
+      if (account === '') {
+        $(this).siblings('p').text('')
+      }
+    })
+    $('#email').blur(function(){
+      var account = $(this).val()
+      if (account === '') {
+        $(this).siblings('p').text('')
+      }
+    })
+    $('#password').keyup(function(event){
+      var account = $(this).val()
+      if (account === '') {
+        $(this).siblings('p').text('')
+      }
+    })
+    $('#password').blur(function(){
+      var account = $(this).val()
+      if (account === '') {
+        $(this).siblings('p').text('')
+      }
+    })
+    $('#confirm').keyup(function(event){
+      var account = $(this).val()
+      if (account === '') {
+        $(this).siblings('p').text('')
+      }
+    })
+    $('#confirm').blur(function(){
+      var account = $(this).val()
+      if (account === '') {
+        $(this).siblings('p').text('')
+      }
+    })
+    $('#phone').keyup(function(event){
+      var account = $(this).val()
+      if (account === '') {
+        $(this).siblings('p').text('')
+      }
+    })
+    $('#phone').blur(function(){
+      var account = $(this).val()
+      if (account === '') {
+        $(this).siblings('p').text('')
+      }
+    })
+
+    $('#phone').focus(function(){
+      var state = $('#email').siblings('p').text()
+      if (state != '✔') {
+        $('#email').siblings('p').text('请先输入账号')
+        $('#phone').keydown(function(event){
+          event.preventDefault()
+        })
+        // $(this).attr("readonly","readonly")
+      }else{
+        // $(this).removeAttr("readonly","readonly")
+        $('#phone').keydown(function(event){
+        })
+      }
+    })
+  </script>
+</body>
+</html>

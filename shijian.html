@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" type="text/css" href="css/reset.css">
+  <title>Document</title>
+  <style>
+    body{
+      height: 5000px;
+    }
+    header{
+        width: 100%;
+        height: 500px;
+        background-color: #ccc;
+        font-size: 100px;
+        color:#fff;
+        text-align: center;
+    }
+    section{
+        width: 80%;
+        margin:0 auto;
+    }
+    section .box1,.box2,.box3,.box4{
+        width: 100%;
+        height: 500px;
+        font-size: 100px;
+        color:#fff;
+        text-align: center;
+    }
+    section .box1{
+        background-color: yellow;
+    }
+    section .box2{
+        background-color: purple;
+    }
+    section .box3{
+        background-color: brown;
+    }
+    section .box4{
+        background-color: green;
+    }
+    ul{
+        position:fixed;
+        top:200px;
+        right:0;
+        display:none;
+    }
+    ul li{
+      margin-top: 4px;
+    }
+    ul li a{
+      display: block;
+      width: 35px;
+      height: 35px;
+      background-color: pink;
+      color:#fff;
+      text-align: center;
+      line-height: 35px;
+    }
+    .back{
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <header>我是header</header>
+  <section>
+      <div class="box1">我是老大</div>
+      <div class="box2">我是老二</div>
+      <div class="box3">我是老三</div>
+      <div class="box4">我是老四</div>
+  </section>
+  <ul class="list">
+    <li><a href="javascript:;" data-index='0'>一</a></li>
+    <li><a href="javascript:;" data-index='1'>二</a></li>
+    <li><a href="javascript:;" data-index='2'>三</a></li>
+    <li><a href="javascript:;" data-index='3'>四</a></li>
+  </ul>
+  <button class="back">返回</button>
+  <script>
+    // 事件 onclick onmouseenter onmouseleave onfocus onblur ondblclick onkeydown onkeyup onkeypress onscroll onmousemove onchange onload 等同于 jq 的 ready
+    // 一些表单的html属性 value 都可以通过 原生dom.属性名 修改或获取
+
+    // window.onload = function(){} (页面中的dom元素加载完毕尤其是图片)
+    // $(document).ready(function(){})
+
+    document.querySelector('.back').onclick = function(){
+      // 设置滚动条距离顶部的距离设置成0
+      // window.scrollTo(0,0)
+      // 滚动条距离顶部的距离documentElement.scrollTop
+      document.documentElement.scrollTop = 0    
+    }
+
+    window.onscroll = function(){
+      var juli = document.documentElement.scrollTop
+      console.log(juli);
+      if(juli > 200){
+        document.querySelector('.back').style.display = 'block'
+        document.querySelector('.list').style.display = 'block'
+      }else{
+        document.querySelector('.back').style.display = 'none'
+        document.querySelector('.list').style.display = 'none'
+      }
+    }
+    var contentArr = document.querySelectorAll('section>div')
+
+
+    // 我的方法
+    // document.querySelector('.list').onclick = function(event){
+    //   var ele = event.target
+    //   if(ele.tagName === 'A'){
+    //     var ind = ele.getAttribute('data-index')
+    //     var top = ind * -500
+    //     console.log(top);
+    //     var topScroll = 500 - top
+    //     document.documentElement.scrollTop = topScroll
+    //   }
+    // }
+      document.querySelector('.list').onclick = function(event){
+        var ele = event.target
+        if(ele.tagName === 'A'){
+          var ind = ele.getAttribute('data-index')*1
+          var juli = contentArr[ind].getBoundingClientRect().top + document.documentElement.scrollTop
+          document.documentElement.scrollTop = juli
+        }
+      }
+
+    
+  </script>
+</body>
+</html>

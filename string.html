@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <p>南京2017年11月6日电 /美通社/经历了火热揭幕和完整升级之后，街道竞速嘉年华南京站将于南京牛首山文化旅游区迎来本年度的收官角逐作为2017的收官之战，赛事主办方再次对比赛进行了升级，加入了更多玩法，让年轻人可以玩得更加尽兴。</p>
+  <script src="./js/jquery-3.3.1.js"></script>
+  <script>
+    // 属性length
+
+    // join 数字转换为字符串
+    // var str = [1,2,3].join('')
+    // console.log(str);
+
+    // split(a) 将字符串以a为分割拆分成数组
+    // a = '11111111'
+    // console.log(a.split('1'));
+
+    // 判断是否全部相等 方法一 把字符串转化为数组 用every
+    // console.log(a.split('').every(function(ele,ind,array){
+    //      return ele === array[0]
+    // }));
+
+    // charAt(下标) 获取字符串中对应下标的字符
+    // console.log(a.charAt(0));
+    // 判断是否全部相等 方法二 用字符串中的第一个分开 用数量去判断
+    // console.log(a.split(a.charAt(0)).length === a.length + 1);
+    
+
+    // replace('要被替换的','新的')
+    // 要被替换的字符串 可以写成正则表达式
+    var article = $('p').text()
+    var re = /2017/g
+    var newArticle = article.replace(re,'2018')
+    console.log(newArticle);
+    $('p').text(newArticle)
+    
+    
+    
+    // match 获取字符串中符合正则表达式的所有项(数组形式)
+    // (?=℃) 紧跟着℃的数字
+    var re = /-?\d{1,2}(?=℃)/g 
+    var str = '最高气温 2℃,最低气温 -4℃'
+    console.log(str.match(re));
+    
+    
+    
+  </script>
+</body>
+</html>
